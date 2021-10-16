@@ -64,11 +64,15 @@ type
   TTranslationFiles = class(TObjectList<TStoredFile>);
 
 {$IFDEF CONDITIONALEXPRESSIONS}
+{$IF CompilerVersion >= 33.0}  // 10.3 RIO up
+  [ComponentPlatformsAttribute(pidWin32 or pidWin64 or pidOSX32 or pidiOSSimulator32 or pidiOSDevice32 or pidiOSDevice64 or pidAndroid32Arm)]
+{$ELSE}
 {$IF CompilerVersion >= 29.0}  // XE8 up
   [ComponentPlatformsAttribute(pidWin32 or pidWin64 or pidOSX32 or pidiOSSimulator or pidiOSDevice32 or pidiOSDevice64 or pidAndroid)]
 {$ELSE}
 {$IF CompilerVersion >= 25.0}  // XE4 up
   [ComponentPlatformsAttribute(pidWin32 or pidWin64 or pidOSX32 or pidiOSSimulator or pidiOSDevice or pidAndroid)]
+{$IFEND}
 {$IFEND}
 {$IFEND}
 {$ENDIF}
